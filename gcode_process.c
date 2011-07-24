@@ -373,6 +373,7 @@ void process_gcode_command() {
 
 				timer_stop();
 				queue_flush();
+				stepper_disable();
 				x_disable();
 				y_disable();
 				z_disable();
@@ -391,6 +392,7 @@ void process_gcode_command() {
 				break;
 			// M84- stop idle hold
 			case 84:
+				stepper_disable();
 				x_disable();
 				y_disable();
 				z_disable();
@@ -671,6 +673,7 @@ void process_gcode_command() {
 				//? This one is pointless in Teacup. Implemented to calm the RepRap gurus.
 				//?
 				power_on();
+				stepper_enable();
 				x_enable();
 				y_enable();
 				z_enable();
@@ -686,6 +689,7 @@ void process_gcode_command() {
 					// wait for all moves to complete
 					queue_wait();
 				#endif
+				stepper_disable();
 				x_disable();
 				y_disable();
 				z_disable();
